@@ -17,7 +17,7 @@ fi
 if ! command -v mosquitto &>/dev/null; then
   echo ">> Mosquitto installieren..."
   sudo apt-get install -y mosquitto mosquitto-clients
-  sudo cp /home/cedric/flora-pi/deploy/mosquitto.conf /etc/mosquitto/conf.d/flora-pi.conf
+  sudo cp /home/cedric/planqt/deploy/mosquitto.conf /etc/mosquitto/conf.d/flora-pi.conf
   sudo systemctl enable mosquitto
   sudo systemctl restart mosquitto
 else
@@ -25,7 +25,7 @@ else
 fi
 
 # Projektverzeichnis
-cd /home/cedric/flora-pi
+cd /home/cedric/planqt
 
 # Dependencies installieren
 echo ">> npm install..."
@@ -47,7 +47,7 @@ mkdir -p backend/uploads backend/data
 if [ ! -f backend/.env ]; then
   cp backend/.env.example backend/.env
   echo ">> backend/.env erstellt — bitte VAPID-Keys generieren:"
-  echo "   cd /home/cedric/flora-pi && npx web-push generate-vapid-keys"
+  echo "   cd /home/cedric/planqt && npx web-push generate-vapid-keys"
 fi
 
 # systemd Service installieren

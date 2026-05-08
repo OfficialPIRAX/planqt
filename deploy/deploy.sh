@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PI_HOST="${1:-cedric@flora-pi.local}"
-PI_DIR="/home/cedric/flora-pi"
+PI_HOST="${1:-cedric@pi-cedric.local}"
+PI_DIR="/home/cedric/planqt"
 
 echo "=== Flora-Pi: Deployment auf $PI_HOST ==="
 
@@ -24,4 +24,4 @@ ssh "$PI_HOST" "sudo systemctl restart flora-pi"
 
 echo ""
 echo "=== Deployment abgeschlossen! ==="
-echo "    http://flora-pi.local:3000"
+echo "    http://pi-cedric.local:3000"

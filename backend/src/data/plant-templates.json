@@ -1,0 +1,493 @@
+[
+  {
+    "id": "tomato",
+    "name": "Tomate",
+    "scientificName": "Solanum lycopersicum",
+    "category": "vegetable",
+    "cropCoefficient": { "initial": 0.6, "mid": 1.15, "late": 0.7 },
+    "optimalSoilMoisture": { "min": 50, "max": 75, "critical": 30 },
+    "rootDepthCm": 40,
+    "careTips": [
+      "Morgens gießen, nicht abends",
+      "Staunässe vermeiden",
+      "Regelmäßig ausgeizen",
+      "Blätter nicht von oben nass machen"
+    ],
+    "isOutdoor": true
+  },
+  {
+    "id": "basil",
+    "name": "Basilikum",
+    "scientificName": "Ocimum basilicum",
+    "category": "herb",
+    "cropCoefficient": { "initial": 0.6, "mid": 1.0, "late": 0.8 },
+    "optimalSoilMoisture": { "min": 45, "max": 70, "critical": 25 },
+    "rootDepthCm": 20,
+    "careTips": [
+      "Sonnig stellen",
+      "Nicht von oben gießen",
+      "Triebspitzen regelmäßig ernten",
+      "Keine Staunässe"
+    ],
+    "isOutdoor": false
+  },
+  {
+    "id": "lavender",
+    "name": "Lavendel",
+    "scientificName": "Lavandula angustifolia",
+    "category": "shrub",
+    "cropCoefficient": { "initial": 0.4, "mid": 0.7, "late": 0.5 },
+    "optimalSoilMoisture": { "min": 25, "max": 50, "critical": 15 },
+    "rootDepthCm": 50,
+    "careTips": [
+      "Sehr trockenheitsverträglich",
+      "Gut drainiertes Substrat verwenden",
+      "Nach der Blüte zurückschneiden",
+      "Volle Sonne bevorzugt"
+    ],
+    "isOutdoor": true
+  },
+  {
+    "id": "olive",
+    "name": "Olivenbaum",
+    "scientificName": "Olea europaea",
+    "category": "tree",
+    "cropCoefficient": { "initial": 0.65, "mid": 0.7, "late": 0.7 },
+    "optimalSoilMoisture": { "min": 30, "max": 55, "critical": 20 },
+    "rootDepthCm": 60,
+    "careTips": [
+      "Frostfrei überwintern (unter +5°C kritisch)",
+      "Durchlässiges Substrat verwenden",
+      "Im Winter deutlich weniger gießen",
+      "Vollsonniger Standort im Sommer"
+    ],
+    "isOutdoor": true
+  },
+  {
+    "id": "unknown",
+    "name": "Unbekannte Pflanze",
+    "scientificName": null,
+    "category": "other",
+    "cropCoefficient": { "initial": 0.7, "mid": 1.0, "late": 0.8 },
+    "optimalSoilMoisture": { "min": 40, "max": 65, "critical": 25 },
+    "rootDepthCm": 30,
+    "careTips": ["Generischer Wert — bitte spezifizieren falls möglich"],
+    "isOutdoor": true
+  },
+  {
+    "id": "geranium",
+    "name": "Geranie",
+    "scientificName": "Pelargonium zonale",
+    "category": "flower",
+    "cropCoefficient": { "initial": 0.5, "mid": 0.85, "late": 0.65 },
+    "optimalSoilMoisture": { "min": 40, "max": 65, "critical": 20 },
+    "rootDepthCm": 25,
+    "careTips": [
+      "Regelmäßig düngen während der Blütezeit",
+      "Verblühtes entfernen fördert Nachblüte",
+      "Staunässe unbedingt vermeiden",
+      "Sonniger bis halbschattiger Standort"
+    ],
+    "isOutdoor": true
+  },
+  {
+    "id": "petunia",
+    "name": "Petunie",
+    "scientificName": "Petunia x hybrida",
+    "category": "flower",
+    "cropCoefficient": { "initial": 0.5, "mid": 0.9, "late": 0.65 },
+    "optimalSoilMoisture": { "min": 45, "max": 70, "critical": 25 },
+    "rootDepthCm": 20,
+    "careTips": [
+      "Braucht viel Wasser bei Hitze",
+      "Wöchentlich mit Blühpflanzendünger versorgen",
+      "Regen kann Blüten beschädigen",
+      "Vollsonniger Standort ideal"
+    ],
+    "isOutdoor": true
+  },
+  {
+    "id": "hydrangea",
+    "name": "Hortensie",
+    "scientificName": "Hydrangea macrophylla",
+    "category": "shrub",
+    "cropCoefficient": { "initial": 0.5, "mid": 0.9, "late": 0.65 },
+    "optimalSoilMoisture": { "min": 50, "max": 80, "critical": 30 },
+    "rootDepthCm": 40,
+    "careTips": [
+      "Liebt feuchten, aber nicht nassen Boden",
+      "Halbschattiger Standort bevorzugt",
+      "Regenwasser zum Gießen verwenden",
+      "Boden-pH beeinflusst Blütenfarbe"
+    ],
+    "isOutdoor": true
+  },
+  {
+    "id": "rosemary",
+    "name": "Rosmarin",
+    "scientificName": "Salvia rosmarinus",
+    "category": "herb",
+    "cropCoefficient": { "initial": 0.4, "mid": 0.7, "late": 0.55 },
+    "optimalSoilMoisture": { "min": 25, "max": 50, "critical": 15 },
+    "rootDepthCm": 35,
+    "careTips": [
+      "Trockenheitsverträglich, sparsam gießen",
+      "Durchlässiges, kalkhaltiges Substrat",
+      "Vollsonnig aufstellen",
+      "Im Winter frostfrei halten"
+    ],
+    "isOutdoor": true
+  },
+  {
+    "id": "thyme",
+    "name": "Thymian",
+    "scientificName": "Thymus vulgaris",
+    "category": "herb",
+    "cropCoefficient": { "initial": 0.4, "mid": 0.7, "late": 0.5 },
+    "optimalSoilMoisture": { "min": 20, "max": 45, "critical": 12 },
+    "rootDepthCm": 20,
+    "careTips": [
+      "Sehr genügsam, wenig Wasser nötig",
+      "Mageres, durchlässiges Substrat bevorzugt",
+      "Volle Sonne für bestes Aroma",
+      "Nach der Blüte leicht zurückschneiden"
+    ],
+    "isOutdoor": true
+  },
+  {
+    "id": "sage",
+    "name": "Salbei",
+    "scientificName": "Salvia officinalis",
+    "category": "herb",
+    "cropCoefficient": { "initial": 0.4, "mid": 0.7, "late": 0.55 },
+    "optimalSoilMoisture": { "min": 25, "max": 50, "critical": 15 },
+    "rootDepthCm": 30,
+    "careTips": [
+      "Trockenheitsverträglich, sparsam gießen",
+      "Sonniger, warmer Standort",
+      "Im Frühjahr kräftig zurückschneiden",
+      "Nicht ins alte Holz schneiden"
+    ],
+    "isOutdoor": true
+  },
+  {
+    "id": "parsley",
+    "name": "Petersilie",
+    "scientificName": "Petroselinum crispum",
+    "category": "herb",
+    "cropCoefficient": { "initial": 0.5, "mid": 1.0, "late": 0.75 },
+    "optimalSoilMoisture": { "min": 45, "max": 70, "critical": 25 },
+    "rootDepthCm": 25,
+    "careTips": [
+      "Gleichmäßig feucht halten",
+      "Halbschatten wird toleriert",
+      "Nährstoffreichen Boden verwenden",
+      "Nicht neben anderen Doldenblütlern pflanzen"
+    ],
+    "isOutdoor": false
+  },
+  {
+    "id": "chives",
+    "name": "Schnittlauch",
+    "scientificName": "Allium schoenoprasum",
+    "category": "herb",
+    "cropCoefficient": { "initial": 0.5, "mid": 0.9, "late": 0.7 },
+    "optimalSoilMoisture": { "min": 45, "max": 70, "critical": 25 },
+    "rootDepthCm": 20,
+    "careTips": [
+      "Gleichmäßig feucht halten",
+      "Sonnig bis halbschattig",
+      "Regelmäßig ernten fördert Wachstum",
+      "Frosthart, kann draußen überwintern"
+    ],
+    "isOutdoor": false
+  },
+  {
+    "id": "strawberry",
+    "name": "Erdbeere",
+    "scientificName": "Fragaria x ananassa",
+    "category": "vegetable",
+    "cropCoefficient": { "initial": 0.4, "mid": 0.85, "late": 0.7 },
+    "optimalSoilMoisture": { "min": 45, "max": 70, "critical": 25 },
+    "rootDepthCm": 25,
+    "careTips": [
+      "Früchte nicht direkt auf feuchten Boden legen",
+      "Mulchen reduziert Verdunstung",
+      "Ausläufer entfernen für mehr Fruchtertrag",
+      "Sonniger Standort für süße Früchte"
+    ],
+    "isOutdoor": true
+  },
+  {
+    "id": "bell_pepper",
+    "name": "Paprika",
+    "scientificName": "Capsicum annuum",
+    "category": "vegetable",
+    "cropCoefficient": { "initial": 0.6, "mid": 1.05, "late": 0.7 },
+    "optimalSoilMoisture": { "min": 50, "max": 75, "critical": 30 },
+    "rootDepthCm": 35,
+    "careTips": [
+      "Wärmeliebend, geschützter Standort",
+      "Regelmäßig und gleichmäßig gießen",
+      "Erste Blüte (Königsblüte) ausbrechen",
+      "Ab Fruchtansatz regelmäßig düngen"
+    ],
+    "isOutdoor": true
+  },
+  {
+    "id": "chili",
+    "name": "Chili",
+    "scientificName": "Capsicum frutescens",
+    "category": "vegetable",
+    "cropCoefficient": { "initial": 0.6, "mid": 1.05, "late": 0.7 },
+    "optimalSoilMoisture": { "min": 45, "max": 70, "critical": 25 },
+    "rootDepthCm": 30,
+    "careTips": [
+      "Braucht viel Wärme und Sonne",
+      "Leichten Trockenstress vor Ernte fördert Schärfe",
+      "Nicht unter 10°C stellen",
+      "Regelmäßig mit Tomatendünger versorgen"
+    ],
+    "isOutdoor": false
+  },
+  {
+    "id": "cucumber",
+    "name": "Gurke",
+    "scientificName": "Cucumis sativus",
+    "category": "vegetable",
+    "cropCoefficient": { "initial": 0.6, "mid": 1.0, "late": 0.75 },
+    "optimalSoilMoisture": { "min": 55, "max": 80, "critical": 35 },
+    "rootDepthCm": 30,
+    "careTips": [
+      "Gleichmäßige Wasserversorgung wichtig",
+      "Niemals kaltes Wasser verwenden",
+      "Rankhilfe anbieten",
+      "Windgeschützter, warmer Standort"
+    ],
+    "isOutdoor": true
+  },
+  {
+    "id": "zucchini",
+    "name": "Zucchini",
+    "scientificName": "Cucurbita pepo",
+    "category": "vegetable",
+    "cropCoefficient": { "initial": 0.5, "mid": 1.0, "late": 0.7 },
+    "optimalSoilMoisture": { "min": 50, "max": 75, "critical": 30 },
+    "rootDepthCm": 40,
+    "careTips": [
+      "Starkzehrer, viel Kompost einarbeiten",
+      "Morgens gießen, Blätter trocken halten",
+      "Früchte jung ernten für besten Geschmack",
+      "Viel Platz einplanen (mind. 1m²)"
+    ],
+    "isOutdoor": true
+  },
+  {
+    "id": "boxwood",
+    "name": "Buchsbaum",
+    "scientificName": "Buxus sempervirens",
+    "category": "shrub",
+    "cropCoefficient": { "initial": 0.5, "mid": 0.8, "late": 0.7 },
+    "optimalSoilMoisture": { "min": 35, "max": 60, "critical": 20 },
+    "rootDepthCm": 40,
+    "careTips": [
+      "Gleichmäßig feucht, aber nicht nass halten",
+      "Halbschatten bis Schatten verträglich",
+      "Auf Buchsbaumzünsler kontrollieren",
+      "Im Frühjahr und Herbst düngen"
+    ],
+    "isOutdoor": true
+  },
+  {
+    "id": "cherry_laurel",
+    "name": "Kirschlorbeer",
+    "scientificName": "Prunus laurocerasus",
+    "category": "shrub",
+    "cropCoefficient": { "initial": 0.5, "mid": 0.8, "late": 0.7 },
+    "optimalSoilMoisture": { "min": 35, "max": 65, "critical": 20 },
+    "rootDepthCm": 50,
+    "careTips": [
+      "Auch im Winter bei Trockenheit gießen",
+      "Schnitt mit Heckenschere, nicht Motorsäge",
+      "Robust und schnittverträglich",
+      "Sonnig bis schattig möglich"
+    ],
+    "isOutdoor": true
+  },
+  {
+    "id": "bamboo",
+    "name": "Bambus",
+    "scientificName": "Phyllostachys aurea",
+    "category": "shrub",
+    "cropCoefficient": { "initial": 0.6, "mid": 1.0, "late": 0.85 },
+    "optimalSoilMoisture": { "min": 45, "max": 75, "critical": 25 },
+    "rootDepthCm": 40,
+    "careTips": [
+      "Hoher Wasserbedarf, besonders im Sommer",
+      "Rhizomsperre im Garten verwenden",
+      "Wind trocknet schnell aus",
+      "Auch im Winter gießen bei Frost-Trockenheit"
+    ],
+    "isOutdoor": true
+  },
+  {
+    "id": "hibiscus",
+    "name": "Hibiskus",
+    "scientificName": "Hibiscus rosa-sinensis",
+    "category": "flower",
+    "cropCoefficient": { "initial": 0.5, "mid": 0.85, "late": 0.65 },
+    "optimalSoilMoisture": { "min": 45, "max": 70, "critical": 25 },
+    "rootDepthCm": 35,
+    "careTips": [
+      "Nicht winterhart, frostfrei überwintern",
+      "Während der Blüte regelmäßig düngen",
+      "Zugluft vermeiden",
+      "Lauwarm gießen, Staunässe vermeiden"
+    ],
+    "isOutdoor": false
+  },
+  {
+    "id": "oleander",
+    "name": "Oleander",
+    "scientificName": "Nerium oleander",
+    "category": "shrub",
+    "cropCoefficient": { "initial": 0.5, "mid": 0.8, "late": 0.65 },
+    "optimalSoilMoisture": { "min": 40, "max": 70, "critical": 20 },
+    "rootDepthCm": 45,
+    "careTips": [
+      "Verträgt viel Wasser im Sommer",
+      "Alle Pflanzenteile giftig",
+      "Frostfrei, hell überwintern",
+      "Untersetzer mit Wasser im Hochsommer"
+    ],
+    "isOutdoor": true
+  },
+  {
+    "id": "bougainvillea",
+    "name": "Bougainvillea",
+    "scientificName": "Bougainvillea glabra",
+    "category": "flower",
+    "cropCoefficient": { "initial": 0.4, "mid": 0.7, "late": 0.5 },
+    "optimalSoilMoisture": { "min": 25, "max": 55, "critical": 15 },
+    "rootDepthCm": 35,
+    "careTips": [
+      "Trockenstress fördert Blütenbildung",
+      "Vollsonnig aufstellen",
+      "Frostfrei überwintern, kühl und hell",
+      "Erst gießen wenn Erde gut abgetrocknet"
+    ],
+    "isOutdoor": true
+  },
+  {
+    "id": "lemon_tree",
+    "name": "Zitronenbaum",
+    "scientificName": "Citrus limon",
+    "category": "tree",
+    "cropCoefficient": { "initial": 0.65, "mid": 0.7, "late": 0.65 },
+    "optimalSoilMoisture": { "min": 35, "max": 60, "critical": 20 },
+    "rootDepthCm": 50,
+    "careTips": [
+      "Spezial-Zitrusdünger verwenden",
+      "Kalkarmes Wasser bevorzugt",
+      "Hell und frostfrei überwintern (5-10°C)",
+      "Auf Schildläuse kontrollieren"
+    ],
+    "isOutdoor": true
+  },
+  {
+    "id": "fig",
+    "name": "Feige",
+    "scientificName": "Ficus carica",
+    "category": "tree",
+    "cropCoefficient": { "initial": 0.5, "mid": 0.75, "late": 0.65 },
+    "optimalSoilMoisture": { "min": 35, "max": 60, "critical": 20 },
+    "rootDepthCm": 55,
+    "careTips": [
+      "Geschützter, warmer Standort ideal",
+      "Gut durchlässiges Substrat verwenden",
+      "Junge Pflanzen im Winter schützen",
+      "Regelmäßig, aber mäßig gießen"
+    ],
+    "isOutdoor": true
+  },
+  {
+    "id": "marguerite",
+    "name": "Margerite",
+    "scientificName": "Leucanthemum vulgare",
+    "category": "flower",
+    "cropCoefficient": { "initial": 0.5, "mid": 0.85, "late": 0.6 },
+    "optimalSoilMoisture": { "min": 40, "max": 65, "critical": 22 },
+    "rootDepthCm": 25,
+    "careTips": [
+      "Verblühtes regelmäßig entfernen",
+      "Sonniger Standort bevorzugt",
+      "Mäßig gießen, keine Staunässe",
+      "Alle 2 Wochen düngen in der Blütezeit"
+    ],
+    "isOutdoor": true
+  },
+  {
+    "id": "sunflower",
+    "name": "Sonnenblume",
+    "scientificName": "Helianthus annuus",
+    "category": "flower",
+    "cropCoefficient": { "initial": 0.35, "mid": 1.1, "late": 0.55 },
+    "optimalSoilMoisture": { "min": 45, "max": 70, "critical": 25 },
+    "rootDepthCm": 45,
+    "careTips": [
+      "Vollsonniger Standort notwendig",
+      "Hoher Wasserbedarf bei großen Sorten",
+      "Windgeschützter Platz, eventuell stützen",
+      "Nährstoffreichen Boden verwenden"
+    ],
+    "isOutdoor": true
+  },
+  {
+    "id": "fuchsia",
+    "name": "Fuchsie",
+    "scientificName": "Fuchsia hybrida",
+    "category": "flower",
+    "cropCoefficient": { "initial": 0.5, "mid": 0.85, "late": 0.6 },
+    "optimalSoilMoisture": { "min": 50, "max": 75, "critical": 30 },
+    "rootDepthCm": 25,
+    "careTips": [
+      "Halbschattiger Standort ideal",
+      "Gleichmäßig feucht halten",
+      "Keine pralle Mittagssonne",
+      "Frostfrei und dunkel überwintern"
+    ],
+    "isOutdoor": false
+  },
+  {
+    "id": "lettuce",
+    "name": "Salat",
+    "scientificName": "Lactuca sativa",
+    "category": "vegetable",
+    "cropCoefficient": { "initial": 0.7, "mid": 1.0, "late": 0.95 },
+    "optimalSoilMoisture": { "min": 50, "max": 80, "critical": 30 },
+    "rootDepthCm": 20,
+    "careTips": [
+      "Gleichmäßige Feuchtigkeit verhindert Schossen",
+      "Halbschatten bei Hitze vorteilhaft",
+      "Flacher Wurzler, häufig aber wenig gießen",
+      "Schnecken fernhalten"
+    ],
+    "isOutdoor": true
+  },
+  {
+    "id": "arugula",
+    "name": "Rucola",
+    "scientificName": "Eruca vesicaria",
+    "category": "vegetable",
+    "cropCoefficient": { "initial": 0.7, "mid": 1.0, "late": 0.9 },
+    "optimalSoilMoisture": { "min": 45, "max": 70, "critical": 25 },
+    "rootDepthCm": 15,
+    "careTips": [
+      "Regelmäßig gießen für milden Geschmack",
+      "Trockenheit macht Blätter schärfer",
+      "Sonnig bis halbschattig",
+      "Laufend ernten, nicht komplett abschneiden"
+    ],
+    "isOutdoor": true
+  }
+]

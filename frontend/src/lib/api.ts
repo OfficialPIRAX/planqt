@@ -153,7 +153,7 @@ export function markWatered(
   id: string,
   data?: { amountMl?: number; wateredBy?: string },
 ): Promise<void> {
-  return request<void>(`/api/recommendations/${id}/water`, {
+  return request<void>(`/api/recommendations/${id}/watered`, {
     method: 'POST',
     body: JSON.stringify(data ?? {}),
   });

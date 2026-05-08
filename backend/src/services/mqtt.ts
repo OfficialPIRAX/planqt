@@ -38,6 +38,10 @@ function getStatements() {
       SELECT id, friendly_name, type, plant_id, cal_dry_value, cal_wet_value, last_seen_at, battery_level, created_at
       FROM sensors WHERE id = ?
     `),
+    getSensorByFriendlyName: db.prepare(`
+      SELECT id, friendly_name, type, plant_id, cal_dry_value, cal_wet_value, last_seen_at, battery_level, created_at
+      FROM sensors WHERE friendly_name = ?
+    `),
     upsertSensor: db.prepare(`
       INSERT INTO sensors (id, friendly_name, type, created_at)
       VALUES (?, ?, ?, ?)
@@ -76,10 +80,12 @@ function parseSensorRow(row: unknown): Sensor | undefined {
   };
 }
 
-function handleSensorData(sensorId: string, payload: Zigbee2MqttSensorPayload): void {
-  const sensor = parseSensorRow(stmts().getSensor.get(sensorId));
+function handleSensorData(topicName: string, payload: Zigbee2MqttSensorPayload): void {
+  const sensor =
+    parseSensorRow(stmts().getSensor.get(topicName)) ??
+    parseSensorRow(stmts().getSensorByFriendlyName.get(topicName));
   if (!sensor) {
-    logger.warn(`Received data for unknown sensor: ${sensorId}`);
+    logger.warn(`Received data for unknown sensor: ${topicName}`);
     return;
   }
 
@@ -94,7 +100,7 @@ function handleSensorData(sensorId: string, payload: Zigbee2MqttSensorPayload): 
   }
 
   stmts().insertReading.run(
-    sensorId,
+    sensor.id,
     now,
     moisture,
     rawMoisture,
@@ -104,11 +110,11 @@ function handleSensorData(sensorId: string, payload: Zigbee2MqttSensorPayload): 
     payload.battery ?? null,
   );
 
-  stmts().updateSensor.run(now, payload.battery ?? sensor.batteryLevel ?? null, sensorId);
+  stmts().updateSensor.run(now, payload.battery ?? sensor.batteryLevel ?? null, sensor.id);
 
   const reading: SensorReading = {
     id: 0,
-    sensorId,
+    sensorId: sensor.id,
     timestamp: now,
     soilMoisture: moisture,
     soilMoistureRaw: rawMoisture,
@@ -119,7 +125,7 @@ function handleSensorData(sensorId: string, payload: Zigbee2MqttSensorPayload): 
   };
 
   mqttEvents.emit('sensor.reading', reading);
-  logger.debug(`Sensor ${sensorId}: moisture=${moisture}%, temp=${payload.temperature}C`);
+  logger.debug(`Sensor ${sensor.id} (${sensor.friendlyName}): moisture=${moisture}%, temp=${payload.temperature}C`);
 }
 
 function handleBridgeDevices(devices: BridgeDevice[]): void {

@@ -56,7 +56,7 @@ async function request<T>(
    ================================================================ */
 
 export function fetchDashboard(): Promise<DashboardSummary> {
-  return request<DashboardSummary>('/api/dashboard');
+  return request<DashboardSummary>('/api/dashboard/summary');
 }
 
 /* ================================================================

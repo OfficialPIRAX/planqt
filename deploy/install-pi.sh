@@ -29,7 +29,7 @@ cd /home/cedric/planqt
 
 # Dependencies installieren
 echo ">> npm install..."
-npm install --production
+npm install
 
 # Backend bauen
 echo ">> Backend bauen..."
@@ -48,6 +48,18 @@ if [ ! -f backend/.env ]; then
   cp backend/.env.example backend/.env
   echo ">> backend/.env erstellt — bitte VAPID-Keys generieren:"
   echo "   cd /home/cedric/planqt && npx web-push generate-vapid-keys"
+fi
+
+# Zigbee2MQTT External Converter
+Z2M_CONVERTERS="/opt/zigbee2mqtt/data/external_converters"
+if [ -d /opt/zigbee2mqtt ]; then
+  echo ">> Z2M External Converter installieren..."
+  sudo mkdir -p "$Z2M_CONVERTERS"
+  sudo cp deploy/external_converters/zg303z.js "$Z2M_CONVERTERS/"
+  sudo chown -R zigbee2mqtt:zigbee2mqtt "$Z2M_CONVERTERS"
+  echo ">> HINWEIS: In /opt/zigbee2mqtt/data/configuration.yaml muss stehen:"
+  echo "   external_converters:"
+  echo "     - external_converters/zg303z.js"
 fi
 
 # systemd Service installieren

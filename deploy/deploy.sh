@@ -17,7 +17,7 @@ rsync -avz --delete \
   ./ "$PI_HOST:$PI_DIR/"
 
 echo ">> Auf dem Pi: Dependencies & Build..."
-ssh "$PI_HOST" "cd $PI_DIR && npm install --production && npm -w shared run build && npm -w backend run build && npm -w frontend run build"
+ssh "$PI_HOST" "cd $PI_DIR && npm install && npm -w shared run build && npm -w backend run build && npm -w frontend run build"
 
 echo ">> Service neu starten..."
 ssh "$PI_HOST" "sudo systemctl restart flora-pi"

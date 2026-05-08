@@ -5,8 +5,8 @@
     "scientificName": "Solanum lycopersicum",
     "category": "vegetable",
     "cropCoefficient": { "initial": 0.6, "mid": 1.15, "late": 0.7 },
-    "optimalSoilMoisture": { "min": 50, "max": 75, "critical": 30 },
-    "rootDepthCm": 40,
+    "optimalSoilMoisture": { "min": 45, "max": 70, "critical": 25 },
+    "rootDepthCm": 35,
     "careTips": [
       "Morgens gießen, nicht abends",
       "Staunässe vermeiden",
@@ -36,9 +36,9 @@
     "name": "Lavendel",
     "scientificName": "Lavandula angustifolia",
     "category": "shrub",
-    "cropCoefficient": { "initial": 0.4, "mid": 0.7, "late": 0.5 },
-    "optimalSoilMoisture": { "min": 25, "max": 50, "critical": 15 },
-    "rootDepthCm": 50,
+    "cropCoefficient": { "initial": 0.35, "mid": 0.65, "late": 0.5 },
+    "optimalSoilMoisture": { "min": 20, "max": 45, "critical": 10 },
+    "rootDepthCm": 30,
     "careTips": [
       "Sehr trockenheitsverträglich",
       "Gut drainiertes Substrat verwenden",
@@ -256,8 +256,8 @@
     "scientificName": "Cucumis sativus",
     "category": "vegetable",
     "cropCoefficient": { "initial": 0.6, "mid": 1.0, "late": 0.75 },
-    "optimalSoilMoisture": { "min": 55, "max": 80, "critical": 35 },
-    "rootDepthCm": 30,
+    "optimalSoilMoisture": { "min": 50, "max": 80, "critical": 30 },
+    "rootDepthCm": 25,
     "careTips": [
       "Gleichmäßige Wasserversorgung wichtig",
       "Niemals kaltes Wasser verwenden",
@@ -351,14 +351,30 @@
     "name": "Oleander",
     "scientificName": "Nerium oleander",
     "category": "shrub",
-    "cropCoefficient": { "initial": 0.5, "mid": 0.8, "late": 0.65 },
-    "optimalSoilMoisture": { "min": 40, "max": 70, "critical": 20 },
-    "rootDepthCm": 45,
+    "cropCoefficient": { "initial": 0.5, "mid": 0.85, "late": 0.65 },
+    "optimalSoilMoisture": { "min": 35, "max": 75, "critical": 15 },
+    "rootDepthCm": 40,
     "careTips": [
       "Verträgt viel Wasser im Sommer",
       "Alle Pflanzenteile giftig",
       "Frostfrei, hell überwintern",
       "Untersetzer mit Wasser im Hochsommer"
+    ],
+    "isOutdoor": true
+  },
+  {
+    "id": "mandevilla",
+    "name": "Dipladenia",
+    "scientificName": "Mandevilla sanderi",
+    "category": "flower",
+    "cropCoefficient": { "initial": 0.45, "mid": 0.8, "late": 0.6 },
+    "optimalSoilMoisture": { "min": 30, "max": 60, "critical": 15 },
+    "rootDepthCm": 25,
+    "careTips": [
+      "Zwischen den Wassergaben gut abtrocknen lassen",
+      "Durchlässiges Substrat mit Perlite verwenden",
+      "Frostfrei und hell überwintern (mind. 10°C)",
+      "Vollsonnig bis halbschattig aufstellen"
     ],
     "isOutdoor": true
   },

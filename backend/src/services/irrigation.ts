@@ -204,26 +204,22 @@ export function calculateWateringRecommendation(
 
   const netNeedMl = Math.max(0, (waterLossLiters - rainGainLiters) * 1000);
 
-  if (netNeedMl < 50 && moisture >= optimal.min && moisture <= optimal.max) {
+  if (moisture >= optimal.min) {
     return null;
   }
 
   let urgency: Urgency;
-  if (moisture < optimal.min) {
-    urgency = moisture < optimal.min + (optimal.critical - optimal.min) * 0.5 ? 'high' : 'medium';
+  const midpoint = optimal.critical + (optimal.min - optimal.critical) * 0.5;
+  if (moisture < midpoint) {
+    urgency = 'high';
   } else {
-    urgency = 'low';
+    urgency = 'medium';
   }
 
-  const reasonParts: string[] = [];
-
-  if (moisture < optimal.min) {
-    reasonParts.push(`Feuchtigkeit ${moisture}% unter Optimum (${optimal.min}-${optimal.max}%)`);
-  } else {
-    reasonParts.push(`Feuchtigkeit ${moisture}% im Bereich`);
-  }
-
-  reasonParts.push(`ET-Verlust: ${etc.toFixed(1)}mm (Kc=${kc})`);
+  const reasonParts: string[] = [
+    `Feuchtigkeit ${moisture}% unter Optimum (${optimal.min}-${optimal.max}%)`,
+    `ET-Verlust: ${etc.toFixed(1)}mm (Kc=${kc})`,
+  ];
 
   if (template.isOutdoor && weather.rainNext24h > 0) {
     reasonParts.push(`Regen erwartet: ${weather.rainNext24h.toFixed(1)}mm`);

@@ -75,22 +75,8 @@ const stmtTemplate = db.prepare(`
   SELECT * FROM plant_templates WHERE id = ?
 `);
 
-const stmtLatestReading = db.prepare(`
-  SELECT
-    (SELECT id FROM sensor_readings WHERE sensor_id = ?1 ORDER BY timestamp DESC LIMIT 1) AS id,
-    ?1 AS sensor_id,
-    (SELECT timestamp FROM sensor_readings WHERE sensor_id = ?1 ORDER BY timestamp DESC LIMIT 1) AS timestamp,
-    ROUND(AVG(sub.soil_moisture), 1) AS soil_moisture,
-    ROUND(AVG(sub.soil_moisture_raw), 1) AS soil_moisture_raw,
-    NULL AS temperature,
-    NULL AS humidity,
-    NULL AS light,
-    (SELECT battery FROM sensor_readings WHERE sensor_id = ?1 ORDER BY timestamp DESC LIMIT 1) AS battery
-  FROM (
-    SELECT soil_moisture, soil_moisture_raw
-    FROM sensor_readings WHERE sensor_id = ?1
-    ORDER BY timestamp DESC LIMIT 5
-  ) sub
+const stmtLatestReadings = db.prepare(`
+  SELECT * FROM sensor_readings WHERE sensor_id = ? ORDER BY timestamp DESC LIMIT 5
 `);
 
 const stmtOpenRecommendation = db.prepare(`
@@ -299,12 +285,16 @@ export async function processAllPlants(): Promise<ProcessResult[]> {
     }
     const template = rowToTemplate(templateRow);
 
-    const readingRow = stmtLatestReading.get(plant.sensorId!) as ReadingRow | undefined;
-    if (!readingRow) {
+    const recentRows = stmtLatestReadings.all(plant.sensorId!) as ReadingRow[];
+    if (recentRows.length === 0) {
       logger.debug(`No readings for plant ${plant.name} (sensor=${plant.sensorId})`);
       continue;
     }
-    const latestReading = rowToReading(readingRow);
+    const latestReading = rowToReading(recentRows[0]);
+    if (recentRows.length > 1) {
+      const avgMoisture = recentRows.reduce((sum, r) => sum + (r.soil_moisture ?? 0), 0) / recentRows.length;
+      latestReading.soilMoisture = Math.round(avgMoisture * 10) / 10;
+    }
 
     const recommendation = calculateWateringRecommendation(plant, template, latestReading, weather);
 

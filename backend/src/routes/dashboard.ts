@@ -170,23 +170,9 @@ function rowToRecommendation(r: RecommendationRow): WateringRecommendation {
 const stmtAllPlants = db.prepare('SELECT * FROM plants ORDER BY name');
 const stmtTemplateById = db.prepare('SELECT * FROM plant_templates WHERE id = ?');
 const stmtSensorById = db.prepare('SELECT * FROM sensors WHERE id = ?');
-const stmtLatestReading = db.prepare(`
-  SELECT
-    (SELECT id FROM sensor_readings WHERE sensor_id = ?1 ORDER BY timestamp DESC LIMIT 1) AS id,
-    ?1 AS sensor_id,
-    (SELECT timestamp FROM sensor_readings WHERE sensor_id = ?1 ORDER BY timestamp DESC LIMIT 1) AS timestamp,
-    ROUND(AVG(sub.soil_moisture), 1) AS soil_moisture,
-    ROUND(AVG(sub.soil_moisture_raw), 1) AS soil_moisture_raw,
-    (SELECT temperature FROM sensor_readings WHERE sensor_id = ?1 ORDER BY timestamp DESC LIMIT 1) AS temperature,
-    (SELECT humidity FROM sensor_readings WHERE sensor_id = ?1 ORDER BY timestamp DESC LIMIT 1) AS humidity,
-    (SELECT light FROM sensor_readings WHERE sensor_id = ?1 ORDER BY timestamp DESC LIMIT 1) AS light,
-    (SELECT battery FROM sensor_readings WHERE sensor_id = ?1 ORDER BY timestamp DESC LIMIT 1) AS battery
-  FROM (
-    SELECT soil_moisture, soil_moisture_raw
-    FROM sensor_readings WHERE sensor_id = ?1
-    ORDER BY timestamp DESC LIMIT 5
-  ) sub
-`);
+const stmtLatestReadings = db.prepare(
+  'SELECT * FROM sensor_readings WHERE sensor_id = ? ORDER BY timestamp DESC LIMIT 5',
+);
 const stmtOpenRecommendation = db.prepare(
   `SELECT * FROM watering_recommendations
    WHERE plant_id = ? AND acknowledged = 0 AND expired_at IS NULL
@@ -216,8 +202,14 @@ const dashboardPlugin: FastifyPluginAsync = async (app) => {
         const sensorRow = stmtSensorById.get(plant.sensorId) as SensorRow | undefined;
         if (sensorRow) sensor = rowToSensor(sensorRow);
 
-        const readingRow = stmtLatestReading.get(plant.sensorId) as ReadingRow | undefined;
-        if (readingRow) latestReading = rowToReading(readingRow);
+        const recentRows = stmtLatestReadings.all(plant.sensorId) as ReadingRow[];
+        if (recentRows.length > 0) {
+          latestReading = rowToReading(recentRows[0]);
+          if (recentRows.length > 1) {
+            const avgMoisture = recentRows.reduce((sum, r) => sum + (r.soil_moisture ?? 0), 0) / recentRows.length;
+            latestReading.soilMoisture = Math.round(avgMoisture * 10) / 10;
+          }
+        }
       }
 
       const recRow = stmtOpenRecommendation.get(plant.id) as RecommendationRow | undefined;

@@ -68,6 +68,7 @@ const stmtInsert = db.prepare(`
   INSERT INTO push_subscriptions (id, device_label, endpoint, p256dh, auth, preferences, created_at)
   VALUES (?, ?, ?, ?, ?, ?, ?)
 `);
+const stmtAll = db.prepare('SELECT * FROM push_subscriptions ORDER BY created_at DESC');
 const stmtById = db.prepare('SELECT * FROM push_subscriptions WHERE id = ?');
 const stmtDelete = db.prepare('DELETE FROM push_subscriptions WHERE id = ?');
 const stmtUpdatePreferences = db.prepare(
@@ -78,6 +79,12 @@ const pushPlugin: FastifyPluginAsync = async (app) => {
   // GET /api/push/vapid-public-key
   app.get('/api/push/vapid-public-key', async (_req, reply) => {
     return reply.send({ key: config.vapid.publicKey });
+  });
+
+  // GET /api/push/subscriptions
+  app.get('/api/push/subscriptions', async (_req, reply) => {
+    const rows = stmtAll.all() as SubscriptionRow[];
+    return reply.send(rows.map(rowToSubscription));
   });
 
   // POST /api/push/subscribe

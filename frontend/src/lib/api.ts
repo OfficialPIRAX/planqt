@@ -209,7 +209,7 @@ export function subscribePush(data: {
     lowBattery: boolean;
   };
 }): Promise<PushSubscription> {
-  return request<PushSubscription>('/api/push/subscriptions', {
+  return request<PushSubscription>('/api/push/subscribe', {
     method: 'POST',
     body: JSON.stringify(data),
   });
@@ -222,13 +222,14 @@ export function unsubscribePush(id: string): Promise<void> {
 }
 
 export function testPush(id: string): Promise<void> {
-  return request<void>(`/api/push/subscriptions/${id}/test`, {
+  return request<void>('/api/push/test', {
     method: 'POST',
+    body: JSON.stringify({ id }),
   });
 }
 
 export function getVapidPublicKey(): Promise<string> {
-  return request<{ publicKey: string }>('/api/push/vapid-public-key').then(
-    (r) => r.publicKey,
+  return request<{ key: string }>('/api/push/vapid-public-key').then(
+    (r) => r.key,
   );
 }

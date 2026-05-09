@@ -158,7 +158,7 @@ const pushPlugin: FastifyPluginAsync = async (app) => {
 
     const subscription = rowToSubscription(row);
     const success = await sendNotification(subscription, {
-      title: 'Flora-Pi Test',
+      title: 'PlanQT Test',
       body: 'Push-Benachrichtigungen funktionieren!',
       icon: '/icons/plant-default.png',
       tag: 'test',

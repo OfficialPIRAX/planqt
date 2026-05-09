@@ -151,7 +151,7 @@ export async function sendDailyStatus(
   }
 
   const payload = {
-    title: '🌿 Flora-Pi Tagesbericht',
+    title: '🌿 PlanQT Tagesbericht',
     body: lines.join('\n'),
     icon: '/icons/daily-status.png',
     tag: 'daily-status',

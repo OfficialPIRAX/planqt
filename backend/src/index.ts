@@ -80,7 +80,7 @@ async function main(): Promise<void> {
   startScheduler();
 
   await app.listen({ port: config.port, host: '0.0.0.0' });
-  logger.info(`Flora-Pi backend running on port ${config.port} (${config.nodeEnv})`);
+  logger.info(`PlanQT backend running on port ${config.port} (${config.nodeEnv})`);
 
   const shutdown = async (signal: string) => {
     logger.info(`Received ${signal}, shutting down gracefully...`);

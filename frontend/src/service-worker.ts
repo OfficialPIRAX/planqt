@@ -2,7 +2,7 @@
 
 declare const self: ServiceWorkerGlobalScope;
 
-const CACHE_NAME = 'flora-pi-v1';
+const CACHE_NAME = 'planqt-v1';
 const STATIC_ASSETS = ['/', '/manifest.webmanifest'];
 
 self.addEventListener('install', (event) => {
@@ -54,7 +54,7 @@ self.addEventListener('push', (event) => {
       data: payload.data,
       actions: payload.actions,
       vibrate: [200, 100, 200],
-      tag: payload.data?.recommendationId || 'flora-pi',
+      tag: payload.data?.recommendationId || 'planqt',
       renotify: true,
     }),
   );

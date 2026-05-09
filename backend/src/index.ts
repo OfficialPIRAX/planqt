@@ -48,7 +48,6 @@ async function main(): Promise<void> {
   await app.register(fastifyStatic, {
     root: resolve(config.uploadDir),
     prefix: '/uploads/',
-    decorateReply: false,
   });
 
   if (config.nodeEnv === 'production') {

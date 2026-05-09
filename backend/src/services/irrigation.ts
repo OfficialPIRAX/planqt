@@ -76,7 +76,21 @@ const stmtTemplate = db.prepare(`
 `);
 
 const stmtLatestReading = db.prepare(`
-  SELECT * FROM sensor_readings WHERE sensor_id = ? ORDER BY timestamp DESC LIMIT 1
+  SELECT
+    (SELECT id FROM sensor_readings WHERE sensor_id = ?1 ORDER BY timestamp DESC LIMIT 1) AS id,
+    ?1 AS sensor_id,
+    (SELECT timestamp FROM sensor_readings WHERE sensor_id = ?1 ORDER BY timestamp DESC LIMIT 1) AS timestamp,
+    ROUND(AVG(sub.soil_moisture), 1) AS soil_moisture,
+    ROUND(AVG(sub.soil_moisture_raw), 1) AS soil_moisture_raw,
+    NULL AS temperature,
+    NULL AS humidity,
+    NULL AS light,
+    (SELECT battery FROM sensor_readings WHERE sensor_id = ?1 ORDER BY timestamp DESC LIMIT 1) AS battery
+  FROM (
+    SELECT soil_moisture, soil_moisture_raw
+    FROM sensor_readings WHERE sensor_id = ?1
+    ORDER BY timestamp DESC LIMIT 5
+  ) sub
 `);
 
 const stmtOpenRecommendation = db.prepare(`

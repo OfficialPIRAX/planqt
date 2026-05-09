@@ -45,8 +45,6 @@ export function SensorChart({ plantId, className }: SensorChartProps) {
   const chartData = (readings ?? []).map((r) => ({
     time: r.timestamp,
     moisture: r.soilMoisture,
-    temp: r.temperature,
-    light: r.light,
   }));
 
   return (

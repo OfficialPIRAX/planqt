@@ -27,13 +27,14 @@ type PlantWithDetails = DashboardSummary['plants'][number];
 
 interface PlantDetailSheetProps {
   plant: PlantWithDetails;
+  weatherTemp?: number;
   open: boolean;
   onClose: () => void;
   onEdit: () => void;
   onDelete: () => void;
 }
 
-export function PlantDetailSheet({ plant, open, onClose, onEdit, onDelete }: PlantDetailSheetProps) {
+export function PlantDetailSheet({ plant, weatherTemp, open, onClose, onEdit, onDelete }: PlantDetailSheetProps) {
   const queryClient = useQueryClient();
   const reading = plant.latestReading;
   const template = plant.template;
@@ -211,10 +212,10 @@ export function PlantDetailSheet({ plant, open, onClose, onEdit, onDelete }: Pla
                   />
                   <span className="text-xs font-medium text-muted-foreground">Bodenfeuchte</span>
                 </div>
-                <div className="flex flex-col items-center justify-center gap-1 rounded-xl bg-muted/50 p-4">
+                <div className="flex flex-col items-center justify-center gap-1 rounded-xl bg-muted/50 p-4" title="Außentemperatur via Open-Meteo">
                   <Thermometer className="h-6 w-6 text-accent" />
                   <span className="font-display text-xl font-semibold">
-                    {reading?.temperature != null ? `${Math.round(reading.temperature)}°` : '—'}
+                    {weatherTemp != null ? `${Math.round(weatherTemp)}°` : '—'}
                   </span>
                   <span className="text-xs font-medium text-muted-foreground">Temperatur</span>
                 </div>

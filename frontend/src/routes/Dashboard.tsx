@@ -152,6 +152,7 @@ export function Dashboard() {
       {selectedPlant && !isEditOpen && (
         <PlantDetailSheet
           plant={selectedPlant}
+          weatherTemp={data?.weather.tempCurrent}
           open
           onClose={closeSheet}
           onEdit={() => openEdit(selectedPlant.id)}

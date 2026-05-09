@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Bell, BellOff, Smartphone, Trash2, Send, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 import { formatDate } from '@/lib/format';
+import { subscribeToPush } from '@/lib/push';
 
 interface Subscription {
   id: string;
@@ -34,6 +34,14 @@ export function Settings() {
     queryFn: fetchSubscriptions,
   });
 
+  const subscribeMutation = useMutation({
+    mutationFn: (label: string) => subscribeToPush(label),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['push-subscriptions'] });
+      setDeviceLabel('');
+    },
+  });
+
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
       await fetch(`/api/push/subscriptions/${id}`, { method: 'DELETE' });
@@ -43,10 +51,10 @@ export function Settings() {
 
   const testMutation = useMutation({
     mutationFn: async (id: string) => {
-      await fetch(`/api/push/test`, {
+      await fetch('/api/push/test', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ subscriptionId: id }),
+        body: JSON.stringify({ id }),
       });
     },
   });
@@ -90,7 +98,10 @@ export function Settings() {
               placeholder="Gerätename (z.B. Cedrics iPhone)"
               className="flex-1 rounded-lg border border-input bg-background px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-ring"
             />
-            <Button disabled={!deviceLabel.trim()}>
+            <Button
+              disabled={!deviceLabel.trim() || subscribeMutation.isPending}
+              onClick={() => subscribeMutation.mutate(deviceLabel.trim())}
+            >
               <Bell className="h-4 w-4" />
               Aktivieren
             </Button>

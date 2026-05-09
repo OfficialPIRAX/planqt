@@ -48,8 +48,8 @@ self.addEventListener('push', (event) => {
   event.waitUntil(
     self.registration.showNotification(payload.title, {
       body: payload.body,
-      icon: payload.icon || '/icons/icon-192.png',
-      badge: payload.badge || '/icons/icon-192.png',
+      icon: payload.icon || '/favicon.svg',
+      badge: payload.badge || '/favicon.svg',
       image: payload.image,
       data: payload.data,
       actions: payload.actions,

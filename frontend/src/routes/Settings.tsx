@@ -165,6 +165,11 @@ export function Settings() {
           </p>
         </div>
       </div>
+
+      {/* Version */}
+      <p className="text-center text-xs text-muted-foreground/60">
+        PlanQT v{__APP_VERSION__}
+      </p>
     </div>
   );
 }

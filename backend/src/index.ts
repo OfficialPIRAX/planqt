@@ -26,6 +26,7 @@ async function main(): Promise<void> {
   const { default: dashboardRoutes } = await import('./routes/dashboard.js');
   const { default: uploadRoutes } = await import('./routes/upload.js');
   const { default: eventsRoutes } = await import('./routes/events.js');
+  const { default: notificationsRoutes } = await import('./routes/notifications.js');
 
   seedPlantTemplates();
 
@@ -75,6 +76,7 @@ async function main(): Promise<void> {
   await app.register(dashboardRoutes);
   await app.register(uploadRoutes);
   await app.register(eventsRoutes);
+  await app.register(notificationsRoutes);
 
   startMqtt();
   startScheduler();

@@ -30,6 +30,11 @@ const stmtDeleteSubscription = db.prepare(`
   DELETE FROM push_subscriptions WHERE id = ?
 `);
 
+const stmtLogNotification = db.prepare(`
+  INSERT INTO notification_log (title, body, type, plant_id, recommendation_id, created_at)
+  VALUES (?, ?, ?, ?, ?, ?)
+`);
+
 function rowToSubscription(r: SubscriptionRow): PushSubscription {
   return {
     id: r.id,
@@ -116,6 +121,15 @@ export async function notifyWatering(
     ],
   };
 
+  stmtLogNotification.run(
+    payload.title,
+    payload.body,
+    'watering',
+    plant.id,
+    recommendation.id,
+    new Date().toISOString(),
+  );
+
   for (const sub of subscriptions) {
     const prefs = sub.preferences;
     if (recommendation.urgency === 'critical' && !prefs.criticalAlerts) continue;
@@ -157,6 +171,15 @@ export async function sendDailyStatus(
     tag: 'daily-status',
     data: { type: 'daily-status' },
   };
+
+  stmtLogNotification.run(
+    payload.title,
+    payload.body,
+    'daily-status',
+    null,
+    null,
+    new Date().toISOString(),
+  );
 
   for (const sub of subscriptions) {
     await sendNotification(sub, payload);

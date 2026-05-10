@@ -35,7 +35,16 @@ const stmtLogNotification = db.prepare(`
   VALUES (?, ?, ?, ?, ?, ?)
 `);
 
+const stmtRecentDuplicate = db.prepare(`
+  SELECT id FROM notification_log
+  WHERE type = ? AND title = ? AND created_at > ?
+  LIMIT 1
+`);
+
 export function logNotification(title: string, body: string, type: string, plantId?: string, recommendationId?: string) {
+  const oneMinuteAgo = new Date(Date.now() - 60_000).toISOString();
+  const existing = stmtRecentDuplicate.get(type, title, oneMinuteAgo);
+  if (existing) return;
   stmtLogNotification.run(title, body, type, plantId ?? null, recommendationId ?? null, new Date().toISOString());
 }
 

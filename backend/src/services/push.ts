@@ -35,6 +35,10 @@ const stmtLogNotification = db.prepare(`
   VALUES (?, ?, ?, ?, ?, ?)
 `);
 
+export function logNotification(title: string, body: string, type: string, plantId?: string, recommendationId?: string) {
+  stmtLogNotification.run(title, body, type, plantId ?? null, recommendationId ?? null, new Date().toISOString());
+}
+
 function rowToSubscription(r: SubscriptionRow): PushSubscription {
   return {
     id: r.id,

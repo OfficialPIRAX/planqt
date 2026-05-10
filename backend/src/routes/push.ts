@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { v4 as uuidv4 } from 'uuid';
 import { db } from '../db/connection.js';
 import { config } from '../config.js';
-import { sendNotification } from '../services/push.js';
+import { sendNotification, logNotification } from '../services/push.js';
 
 interface SubscriptionRow {
   id: string;
@@ -157,13 +157,17 @@ const pushPlugin: FastifyPluginAsync = async (app) => {
     }
 
     const subscription = rowToSubscription(row);
+    const title = 'PlanQT Test';
+    const body = 'Push-Benachrichtigungen funktionieren!';
     const success = await sendNotification(subscription, {
-      title: 'PlanQT Test',
-      body: 'Push-Benachrichtigungen funktionieren!',
+      title,
+      body,
       icon: '/icons/plant-default.png',
       tag: 'test',
       data: { type: 'test' },
     });
+
+    if (success) logNotification(title, body, 'test');
 
     return reply.send({ success });
   });

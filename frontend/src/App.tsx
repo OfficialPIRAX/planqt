@@ -13,6 +13,7 @@ import {
   CloudSun,
 } from 'lucide-react';
 import { LiveDot } from '@/components/LiveDot';
+import { NotificationBell } from '@/components/NotificationPanel';
 import { useSSE } from '@/lib/sse';
 import { fetchDashboard } from '@/lib/api';
 import { Dashboard } from '@/routes/Dashboard';
@@ -64,7 +65,7 @@ function AppShell() {
             <LiveDot />
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             {weather && (
               <div className="hidden items-center gap-1.5 text-sm text-muted-foreground sm:flex">
                 <WeatherIcon description={weather.description} />
@@ -75,6 +76,7 @@ function AppShell() {
                 )}
               </div>
             )}
+            <NotificationBell />
             <button
               onClick={() => navigate('/?new=1')}
               className="flex h-9 items-center gap-1.5 rounded-lg bg-primary px-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-light active:scale-[0.97]"
